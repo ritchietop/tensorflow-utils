@@ -50,6 +50,11 @@
             <artifactId>tensorflow</artifactId>
             <version>${tensorflow.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tensorflow</groupId>
+            <artifactId>spark-tensorflow-connector_${scala_lang.version}</artifactId>
+            <version>${tensorflow.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -123,5 +128,23 @@
             </plugin>
         </plugins>
     </build>
+
+    <scm>
+        <developerConnection>
+            scm:git:git@github.com:ritchietop/tensorflow-utils.git
+        </developerConnection>
+    </scm>
+    <distributionManagement>
+        <repository>
+            <id>archiva.internal</id>
+            <name>Internal Release Repository</name>
+            <url>http://nexus.d.xiaomi.net/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>archiva.snapshots</id>
+            <name>Internal Snapshot Repository</name>
+            <url>http://nexus.d.xiaomi.net/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
