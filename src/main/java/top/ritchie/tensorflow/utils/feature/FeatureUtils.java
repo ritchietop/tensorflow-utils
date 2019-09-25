@@ -93,7 +93,7 @@ public class FeatureUtils {
         }
     }
 
-    public static Feature byteStringFeature2(Iterable<String> values) {
+    public static Feature byteStringFeature(Iterable<String> values) {
         if (values == null) {
             return null;
         }
