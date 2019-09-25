@@ -3,7 +3,6 @@ package top.ritchie.tensorflow.utils.feature;
 import org.tensorflow.example.Feature;
 import org.tensorflow.example.Features;
 
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,8 +18,10 @@ public class FeatureMap {
         this.map = new HashMap<>(volume);
     }
 
-    public void put(@Nonnull String key, @Nonnull Feature value) {
-        this.map.put(key, value);
+    public void put(String key, Feature value) {
+        if (key != null && value != null) {
+            this.map.put(key, value);
+        }
     }
 
     public Features features() {
