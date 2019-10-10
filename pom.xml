@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>top.ritchie.tensorflow</groupId>
-    <artifactId>tensorflow-utils_${tensorflow.version}</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>tensorflow-utils</artifactId>
+    <version>${tensorflow.version}-SNAPSHOT</version>
 
     <properties>
         <java.version>1.8</java.version>
