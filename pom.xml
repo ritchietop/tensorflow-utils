@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>top.ritchie.tensorflow</groupId>
-    <artifactId>tensorflow-utils</artifactId>
+    <artifactId>tensorflow-utils_${tensorflow.version}</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -16,10 +16,6 @@
         <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
         <grpc.version>1.23.0</grpc.version>
         <protoc.version>3.5.1</protoc.version>
-        <maven-scala-plugin.version>2.15.2</maven-scala-plugin.version>
-        <shadedClassifier>bin</shadedClassifier>
-        <scala_lang.version>2.11</scala_lang.version>
-        <scala.version>2.11.12</scala.version>
     </properties>
 
     <dependencies>
