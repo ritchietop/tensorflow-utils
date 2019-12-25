@@ -1,13 +1,9 @@
 package top.ritchie.tensorflow.utils.feature;
 
 import com.google.protobuf.ByteString;
-import org.tensorflow.example.BytesList;
-import org.tensorflow.example.Feature;
-import org.tensorflow.example.FloatList;
-import org.tensorflow.example.Int64List;
+import org.tensorflow.example.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,13 +16,11 @@ public class FeatureUtils {
         if (values == null || values.length == 0) {
             return null;
         } else {
-            Long[] longValues = new Long[values.length];
-            for (int i = 0; i < values.length; i++) {
-                longValues[i] = values[i];
+            List<Long> longValues = new ArrayList<>();
+            for (long value : values) {
+                longValues.add(value);
             }
-            Iterable<Long> intIter = Arrays.asList(longValues);
-            Int64List int64List = Int64List.newBuilder().addAllValue(intIter).build();
-            return Feature.newBuilder().setInt64List(int64List).build();
+            return int64ListFeature(longValues);
         }
     }
 
@@ -43,13 +37,11 @@ public class FeatureUtils {
         if (values == null || values.length == 0) {
             return null;
         } else {
-            Float[] floatValues = new Float[values.length];
-            for (int i = 0; i < values.length; i++) {
-                floatValues[i] = values[i];
+            List<Float> floatValues = new ArrayList<>();
+            for (float value : values) {
+                floatValues.add(value);
             }
-            Iterable<Float> floatIter = Arrays.asList(floatValues);
-            FloatList floatList = FloatList.newBuilder().addAllValue(floatIter).build();
-            return Feature.newBuilder().setFloatList(floatList).build();
+            return floatListFeature(floatValues);
         }
     }
 
@@ -57,9 +49,9 @@ public class FeatureUtils {
         if (values == null || values.length == 0) {
             return null;
         } else {
-            float[] floatValues = new float[values.length];
-            for (int i = 0; i < values.length; i++) {
-                floatValues[i] = (float) values[i];
+            List<Float> floatValues = new ArrayList<>();
+            for (double value : values) {
+                floatValues.add((float) value);
             }
             return floatListFeature(floatValues);
         }
@@ -78,16 +70,16 @@ public class FeatureUtils {
         if (values == null || values.length == 0) {
             return null;
         } else {
-            List<ByteString> strIter = new ArrayList<>();
+            List<ByteString> bytesStringList = new ArrayList<>();
             for (String value : values) {
                 if (value != null) {
-                    strIter.add(ByteString.copyFromUtf8(value));
+                    bytesStringList.add(ByteString.copyFromUtf8(value));
                 }
             }
-            if (strIter.size() == 0) {
+            if (bytesStringList.size() == 0) {
                 return null;
             } else {
-                BytesList bytesList = BytesList.newBuilder().addAllValue(strIter).build();
+                BytesList bytesList = BytesList.newBuilder().addAllValue(bytesStringList).build();
                 return Feature.newBuilder().setBytesList(bytesList).build();
             }
         }
@@ -97,17 +89,34 @@ public class FeatureUtils {
         if (values == null) {
             return null;
         }
-        List<ByteString> strIter = new ArrayList<>();
+        List<ByteString> bytesStringList = new ArrayList<>();
         for (String value : values) {
             if (value != null) {
-                strIter.add(ByteString.copyFromUtf8(value));
+                bytesStringList.add(ByteString.copyFromUtf8(value));
             }
         }
-        if (strIter.size() == 0) {
+        if (bytesStringList.size() == 0) {
             return null;
         } else {
-            BytesList bytesList = BytesList.newBuilder().addAllValue(strIter).build();
+            BytesList bytesList = BytesList.newBuilder().addAllValue(bytesStringList).build();
             return Feature.newBuilder().setBytesList(bytesList).build();
+        }
+    }
+
+    public static FeatureList toFeatureList(Feature... values) {
+        if (values == null || values.length == 0) {
+            return null;
+        }
+        List<Feature> features = new ArrayList<>();
+        for (Feature value : values) {
+            if (value != null) {
+                features.add(value);
+            }
+        }
+        if (features.size() == 0) {
+            return null;
+        } else {
+            return FeatureList.newBuilder().addAllFeature(features).build();
         }
     }
 
